@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ManufacturePro</title>
+    <meta name="description" content="Login to your ManufacturePro account">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="auth-page">
+        <div class="auth-card">
+            <div class="auth-card-logo">
+                <a href="index.html">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="8" fill="#475569" stroke="#334155" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="4" fill="#ffffff"/>
+                        <rect x="18" y="8" width="4" height="4" fill="#475569" rx="1"/>
+                        <rect x="18" y="28" width="4" height="4" fill="#475569" rx="1"/>
+                        <rect x="8" y="18" width="4" height="4" fill="#475569" rx="1"/>
+                        <rect x="28" y="18" width="4" height="4" fill="#475569" rx="1"/>
+                        <rect x="24.5" y="9.5" width="4" height="4" fill="#475569" rx="1" transform="rotate(45 26.5 11.5)"/>
+                        <rect x="11.5" y="26.5" width="4" height="4" fill="#475569" rx="1" transform="rotate(45 13.5 28.5)"/>
+                        <rect x="11.5" y="9.5" width="4" height="4" fill="#475569" rx="1" transform="rotate(-45 13.5 11.5)"/>
+                        <rect x="24.5" y="26.5" width="4" height="4" fill="#475569" rx="1" transform="rotate(-45 26.5 28.5)"/>
+                    </svg>
+                    <span>ManufacturePro</span>
+                </a>
+            </div>
+            <h1>🔐 Login</h1>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                    <label style="display: inline-flex; align-items: center; gap: var(--spacing-xs); margin: 0; white-space: nowrap;">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" style="color: var(--primary-color); font-size: 0.875rem;">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit-btn" style="width: 100%;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    Login
+                </button>
+                <div class="form-message" style="margin-top: var(--spacing-md);"></div>
+            </form>
+            <div style="margin: var(--spacing-lg) 0; text-align: center; color: var(--text-light);">
+                <p style="margin-bottom: var(--spacing-sm);">Or login with</p>
+                <div style="display: flex; gap: var(--spacing-sm); justify-content: center;">
+                    <button type="button" class="btn btn-outline btn-social">Google</button>
+                    <button type="button" class="btn btn-outline btn-social">Facebook</button>
+                </div>
+            </div>
+            <div class="auth-meta">
+                <p>New here? <a href="register.html">Create an account</a></p>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        // Login form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = loginForm.querySelector('#email').value;
+                    const password = loginForm.querySelector('#password').value;
+                    const messageDiv = loginForm.querySelector('.form-message');
+                    
+                    messageDiv.className = 'form-message';
+                    messageDiv.textContent = '';
+                    messageDiv.style.display = 'none';
+                    
+                    // Validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!email || !emailRegex.test(email)) {
+                        messageDiv.className = 'form-message error';
+                        messageDiv.textContent = 'Please enter a valid email address';
+                        messageDiv.style.display = 'block';
+                        return;
+                    }
+                    
+                    if (!password || password.length < 6) {
+                        messageDiv.className = 'form-message error';
+                        messageDiv.textContent = 'Password must be at least 6 characters';
+                        messageDiv.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Success (demo only)
+                    messageDiv.className = 'form-message success';
+                    messageDiv.textContent = 'Login successful! (Demo)';
+                    messageDiv.style.display = 'block';
+                    loginForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -4,9 +4,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const navMenu = document.querySelector('.nav-menu');
+  const header = document.querySelector('header');
   
   if (mobileMenuToggle && navMenu) {
-    mobileMenuToggle.addEventListener('click', function() {
+    mobileMenuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
       navMenu.classList.toggle('active');
       const isExpanded = navMenu.classList.contains('active');
       mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
@@ -19,6 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       });
+    });
+    
+    // Close mobile menu when clicking outside the navigation
+    document.addEventListener('click', function(e) {
+      // Check if click is outside the header/navigation area
+      if (!e.target.closest('header') && !e.target.closest('.nav-menu')) {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 });

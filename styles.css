@@ -2368,20 +2368,24 @@ body.dark-mode .footer-links a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--gradient-hero);
+  background: #fafafa;
   padding: var(--spacing-lg);
   padding-top: var(--spacing-lg);
   margin-top: -80px;
 }
 
+body.dark-mode .auth-page {
+  background: #1a1a1a;
+}
+
 .auth-card {
   background: var(--bg-white);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: var(--spacing-xl);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 400px;
 }
 
 body.dark-mode .auth-card {
@@ -2392,22 +2396,23 @@ body.dark-mode .auth-card {
 .auth-card-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 2rem;
 }
 
 .auth-card-logo a {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .auth-card-logo svg {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
 }
 
@@ -2419,24 +2424,72 @@ body.dark-mode .auth-card {
 
 .auth-card h1 {
   text-align: center;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-weight: 700;
+  display: block;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .auth-form .form-group {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 1.25rem;
 }
 
-.auth-form label {
-  display: block;
-  margin-bottom: var(--spacing-xs);
-  text-align: left;
+/* Floating Label Styles */
+.auth-form .floating-label {
+  position: relative;
+}
+
+.auth-form .floating-label label {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #999;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: #fff;
+  padding: 0 0.25rem;
+  margin: 0;
+}
+
+body.dark-mode .auth-form .floating-label label {
+  background: var(--bg-card);
+  color: #888;
+}
+
+.auth-form .floating-label input:focus + label,
+.auth-form .floating-label input:not(:placeholder-shown) + label,
+.auth-form .floating-label input.has-value + label {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
   font-weight: 500;
+  color: var(--primary-color);
+}
+
+body.dark-mode .auth-form .floating-label input:focus + label,
+body.dark-mode .auth-form .floating-label input:not(:placeholder-shown) + label,
+body.dark-mode .auth-form .floating-label input.has-value + label {
+  color: var(--primary-color);
+}
+
+.auth-form .floating-label input {
+  padding-top: 1.125rem;
+  padding-bottom: 0.375rem;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  transition: border-color 0.15s ease;
+  background: #fff;
+  color: var(--text-primary);
+}
+
+body.dark-mode .auth-form .floating-label input {
+  border-color: #404040;
+  background: var(--bg-card);
 }
 
 .auth-form label[style*="inline-flex"] {
@@ -2444,48 +2497,77 @@ body.dark-mode .auth-card {
 }
 
 .auth-submit-btn {
-  font-size: 0.875rem !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  transition: background-color 0.15s ease;
+}
+
+.auth-submit-btn:hover {
+  background: #2563eb !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .auth-submit-btn {
+  background: var(--primary-color) !important;
+}
+
+body.dark-mode .auth-submit-btn:hover {
+  background: #3b82f6 !important;
 }
 
 .auth-submit-btn svg {
   flex-shrink: 0;
 }
 
-.auth-form input[type="text"],
-.auth-form input[type="email"],
-.auth-form input[type="password"] {
-  width: 100%;
-  padding: var(--spacing-sm);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  font-size: 1rem;
-  transition: var(--transition);
-}
 
-.auth-form input:focus {
+.auth-form .floating-label input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 1px var(--primary-color);
 }
 
 .auth-meta {
   text-align: center;
-  margin-top: var(--spacing-lg);
+  margin-top: 1.5rem;
   color: var(--text-light);
+  font-size: 0.875rem;
 }
 
 .auth-meta p {
   white-space: normal;
   word-wrap: break-word;
+  margin: 0;
 }
 
 .auth-meta a {
   color: var(--primary-color);
   font-weight: 500;
   white-space: normal;
+  text-decoration: none;
+}
+
+.auth-meta a:hover {
+  text-decoration: underline;
+}
+
+.auth-link-forgot {
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.auth-link-forgot:hover {
+  text-decoration: underline;
 }
 
 .form-group-inline {
@@ -2524,12 +2606,53 @@ body.dark-mode .auth-card {
   flex-shrink: 0;
 }
 
+.auth-social-section {
+  margin: 1.5rem 0;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.auth-social-section p {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.auth-social-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
 .btn-social {
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   min-width: 100px;
   flex: 1;
   max-width: 150px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  border-radius: 4px;
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-social:hover {
+  border-color: #ccc;
+  background: #f9f9f9;
+  transform: none;
+  box-shadow: none;
+}
+
+body.dark-mode .btn-social {
+  border-color: #404040;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+body.dark-mode .btn-social:hover {
+  border-color: #505050;
+  background: #2a2a2a;
 }
 
 /* ===================================

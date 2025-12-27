@@ -31,6 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
     });
+    
+    // Close mobile menu when screen size increases (resize event)
+    function closeMobileMenuOnResize() {
+      if (window.innerWidth > 1000) {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+    
+    // Use debounce for resize event to improve performance
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(closeMobileMenuOnResize, 100);
+    });
   }
 });
 
@@ -111,9 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
     svg.setAttribute('stroke-linecap', 'round');
     svg.setAttribute('stroke-linejoin', 'round');
     
-    // Create text span for mode label
-    const textSpan = document.createElement('span');
-    
     if (isDark) {
       // Sun icon for light mode toggle (currently in dark mode, so show light)
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -141,19 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
         lineEl.setAttribute('y2', line.y2);
         svg.appendChild(lineEl);
       });
-      
-      textSpan.textContent = 'Light';
     } else {
       // Moon icon for dark mode toggle (currently in light mode, so show dark)
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('d', 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z');
       svg.appendChild(path);
-      
-      textSpan.textContent = 'Dark';
     }
     
     themeToggle.appendChild(svg);
-    themeToggle.appendChild(textSpan);
   }
 });
 
